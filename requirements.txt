@@ -1,0 +1,17 @@
+# AirBnB Clone V2 Requirements
+# Core web framework
+Flask==2.3.3
+Flask-CORS==4.0.0
+
+# Database and ORM
+SQLAlchemy==1.4.39
+PyMySQL==1.1.0
+
+# Template engine (included with Flask)
+Jinja2==3.1.2
+
+# Development and testing
+unittest2==1.1.0
+
+# Utilities
+python-dotenv==1.0.0
