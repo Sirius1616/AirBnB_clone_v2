@@ -1,4 +1,5 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
+
 """ Console Module """
 import cmd
 import sys
@@ -128,16 +129,23 @@ class HBNBCommand(cmd.Cmd):
         for param in args[1:]:
             if '=' in param:
                 key, value = param.split('=', 1)
-                if value.isdigit():
-                    value = int(value)
-                else:
+                if value.startswith('"') and endswith('"'):
+                    value = value[1:=1]
+                    value = value.replace('"', '\\"')
+                    value = value.replace('_', ' ')
+                elif '.' in value:
                     try:
                         value = float(value)
                     except ValueError:
-                        pass
-                setattr(new_instance, key, value)
-            else:
-                pass
+                        continue
+
+                else:
+                    try:
+                        value = int(value)
+                    except ValueError:
+                        continue
+            setattr(new_instance, key, value)
+
             
 
         storage.save()
