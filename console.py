@@ -158,7 +158,7 @@ class HBNBCommand(cmd.Cmd):
         print("[Usage]: create <className>\n")
 
     def do_show(self, args):
-        """ Method to show an individual object """
+        """Method to show an individual object"""
         new = args.partition(" ")
         c_name = new[0]
         c_id = new[2]
