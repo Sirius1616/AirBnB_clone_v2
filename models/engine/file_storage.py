@@ -29,7 +29,8 @@ class FileStorage:
             return FileStorage.__objects
         else:
             for key, value in FileStorage.__objects.items():
-                if key.startswith(cls):
+                print(key)
+                if key.startswith(classes[cls]):
                     self.__object[key] = value
                 else:
                     continue
