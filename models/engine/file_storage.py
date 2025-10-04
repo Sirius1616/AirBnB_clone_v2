@@ -30,6 +30,13 @@ class FileStorage:
         else:
             for key, value in FileStorage.__objects.items():
                 if key.startswith(cls):
+                    self.__object[key] = value
+                else:
+                    continue
+        if len(__object) == 0:
+            return 'File you request cannot be found on the derver...'
+        else:
+            return self.__object
 
             
 
