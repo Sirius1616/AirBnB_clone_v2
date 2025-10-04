@@ -32,7 +32,7 @@ class FileStorage:
                 class_name = cls
             else:
                 class_name = cls.__name__
-            return {key : value, for key, value in self.__objects.items() if key startswith(class_name)}
+            return {key : value for key, value in self.__objects.items() if key.startswith(class_name)}
             
 
             
@@ -71,3 +71,4 @@ class FileStorage:
 
         if key in self.__objects:
             del self.__objects[key]
+            return self.__objects
