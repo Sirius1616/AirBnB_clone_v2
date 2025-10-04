@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 """This module defines a class User"""
 from models.base_model import BaseModel
 
