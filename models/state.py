@@ -7,4 +7,4 @@ from SQLAlchemy import Column, String,
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = 'states'
-    name = Column
+    name = Column(String())
