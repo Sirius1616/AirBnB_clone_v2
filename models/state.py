@@ -8,5 +8,4 @@ class State(BaseModel, Base):
     """ State class """
     __tablename__ = 'states'
     name = Column(String(128), nullable=False)
-    state_id = Column(Integer, nullable=False)
-    
+    state_id = Column(Integer, nullable=False
