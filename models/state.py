@@ -13,5 +13,5 @@ class State(BaseModel, Base):
     else:
         @property
         def cities(self):
-            all
+            all_cities = storage
     
