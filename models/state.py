@@ -13,5 +13,7 @@ class State(BaseModel, Base):
     else:
         @property
         def cities(self):
-            all_cities = storage
+            all_cities = storage.all(City).values()
+
+            return [city for city in all_cities if city.state_id]
     
