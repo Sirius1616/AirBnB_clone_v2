@@ -10,5 +10,5 @@ class State(BaseModel, Base):
     __tablename__ = 'states
     name = Column(String(128), nullable= False)
     if File
-    cities = relationship('cities', back_populates='state', cascade = 'all', delete
+    cities = relationship('cities', back_populates='state', cascade = 'all', delete)
     
