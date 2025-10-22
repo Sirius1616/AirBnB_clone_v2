@@ -2,18 +2,13 @@
 """ State Module for HBNB project """
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, 
+from storage import FileStorage
 
 
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = 'states
-    name = Column(String(128), nullable=False)
-    if storage == 'db':
-        cities = relationship('City', back_populates='state', cascade='all', delete)
-    else:
-        @property
-        def cities(self):
-            all_cities = storage.all(City).values()
-
-            return [city for city in all_cities if city.state_id == self.id]
+    name = Column(String(128), nullable= False)
+    if File
+    cities = relationship('cities', back_populates='state', cascade = 'all', delete
     
