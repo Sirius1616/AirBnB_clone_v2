@@ -6,5 +6,4 @@ class DBStorage:
 
     def __init__(self):
         self.__engine = None
-        self.__session = None
-        
+        self.__session = 
