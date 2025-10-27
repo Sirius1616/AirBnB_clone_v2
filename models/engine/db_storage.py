@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from sqlalchemy import create_engine
-from os import geten
+from os import getenv
 
 
 class DBStorage:
