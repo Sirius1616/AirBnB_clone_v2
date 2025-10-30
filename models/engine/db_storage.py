@@ -11,6 +11,11 @@ from models.review import Review
 
 class DBStorage:
     """New engine for the model, that implements interaction with the database"""
+    classes = {
+               'BaseModel': BaseModel, 'User': User, 'Place': Place,
+               'State': State, 'City': City, 'Amenity': Amenity,
+               'Review': Review
+              }
 
     __engine = None
     __session = None
