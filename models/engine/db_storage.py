@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 from sqlalchemy import create_engine
 from os import getenv
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class DBStorage:
@@ -22,7 +28,9 @@ class DBStorage:
     def all(self, cls=None):
         """Querries all content of the database based in the classname"""
         if cls == None:
-            self.__session.querry().all()
+            obj = []
+
+
         else:
             self.__session.querry(cls).all()
 
