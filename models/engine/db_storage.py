@@ -24,7 +24,7 @@ class DBStorage:
         if cls == None:
             self.__session.querry().all()
         else:
-            self
+            self.__session.querry(cls).all()
 
     
 
