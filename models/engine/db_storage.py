@@ -11,14 +11,15 @@ from models.review import Review
 
 class DBStorage:
     """New engine for the model, that implements interaction with the database"""
+    
+    __engine = None
+    __session = None
+
     classes = {
                'BaseModel': BaseModel, 'User': User, 'Place': Place,
                'State': State, 'City': City, 'Amenity': Amenity,
                'Review': Review
               }
-
-    __engine = None
-    __session = None
 
     def __init__(self):
         user = getenv('HBNB_MYSQL_USER')
@@ -35,6 +36,8 @@ class DBStorage:
         if cls == None:
             obj = []
 
+        for _classes in self.classes.values():
+            obj.extend(self.__session.querry(_classes).all())
 
         else:
             self.__session.querry(cls).all()
