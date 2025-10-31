@@ -57,7 +57,7 @@ class DBStorage:
 
     def delete(self, obj=None):
         """Delete from the current database session"""
-        
+        self.
 
     
 
