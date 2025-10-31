@@ -61,6 +61,7 @@ class DBStorage:
             self.__session.delete(obj)
 
     
-    def reload(self, )
+    def reload(self):
+        
 
 
