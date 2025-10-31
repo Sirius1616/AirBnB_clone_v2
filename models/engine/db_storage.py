@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine,
+from sqlalchemy.orm import sessionmaker
 from os import getenv
 from models.user import User
 from models.place import Place
@@ -27,6 +28,8 @@ class DBStorage:
         host = getenv('HBNB_MYSQL_HOST')
         database = getenv('HBNB_MYSQL_DB')
         self.__engine = engine(f'mysql+mysqldb://{user}:{password}@{host}/{database}, pool_pre_ping=True')
+        Session = sessionmaker(bind=self.__engine)
+        self.__session = Session()
 
         if os.getenv('HBNB_ENV') = 'test':
             Base.metadata.drop_all(self.__engine)
@@ -34,13 +37,23 @@ class DBStorage:
     def all(self, cls=None):
         """Querries all content of the database based in the classname"""
         if cls == None:
-            obj = []
+            obj = {}
 
         for _classes in self.classes.values():
             obj.extend(self.__session.querry(_classes).all())
+            return obj
 
         else:
-            self.__session.querry(cls).all()
+            return self.__session.querry(classes[cls]).all()
+
+    def new(self, obj):
+        """Adds object to the current database session"""
+        self.__session.add(obj)
+
+    
+    def save(self):
+        """Commits all changes of the current database session"""
+        self.__session
 
     
 
