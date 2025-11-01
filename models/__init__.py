@@ -3,5 +3,12 @@
 from models.engine.file_storage import FileStorage
 from models.DBStorage import DBStorage
 
-storage = FileStorage()
-storage.reload()
+if getenv('HBNB_TYPE_STORAGE') == 'db':
+    storage = DBStorage()
+    storage.reload
+
+else:
+    storage = FileStorage()
+    storage.reload()
+
+
