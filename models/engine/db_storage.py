@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from sqlalchemy import create_engine,
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 from os import getenv
 from models.user import User
 from models.place import Place
@@ -62,7 +62,10 @@ class DBStorage:
     
     def reload(self):
         """Create all tables in the database"""
-        
+        Base.metadata.create_all(self.__engine)
+        session_factory = sessionmaker(bind=self.__engine, expire_on_commit=false)
+        Session = scoped_session(session_factory)
+        self.__session = Session()
 
 
 
