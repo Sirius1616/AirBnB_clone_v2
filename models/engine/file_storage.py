@@ -3,12 +3,6 @@
 import json
 
 from models.base_model import BaseModel
-from models.user import User
-from models.place import Place
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.review import Review
 
 classes = {
             'BaseModel': BaseModel, 'User': User, 'Place': Place,
@@ -51,13 +45,20 @@ class FileStorage:
             json.dump(temp, f)
 
     def reload(self):
-        
+        """Deserializes JSON file to __objects"""
         try:
-            temp = {}
             with open(FileStorage.__file_path, 'r') as f:
+                from models.user import User
+                from models.place import Place
+                from models.state import State
+                from models.city import City
+                from models.amenity import Amenity
+                from models.review import Review
+
                 temp = json.load(f)
                 for key, val in temp.items():
-                        self.all()[key] = classes[val['__class__']](**val)
+                    cls = val["__class__"]
+                    self.__objects[key] = eval(cls)(**val)
         except FileNotFoundError:
             pass
 

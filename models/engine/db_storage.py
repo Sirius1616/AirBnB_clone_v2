@@ -1,13 +1,8 @@
 #!/usr/bin/env python
-from sqlalchemy import create_engine,
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from os import getenv
-from models.user import User
-from models.place import Place
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.review import Review
+from models.base_model import Base
 
 
 class DBStorage:
@@ -15,12 +10,6 @@ class DBStorage:
     
     __engine = None
     __session = None
-
-    classes = {
-               'BaseModel': BaseModel, 'User': User, 'Place': Place,
-               'State': State, 'City': City, 'Amenity': Amenity,
-               'Review': Review
-              }
 
     def __init__(self):
         user = getenv('HBNB_MYSQL_USER')
@@ -30,20 +19,39 @@ class DBStorage:
         self.__engine = create_engine(f'mysql+mysqldb://{user}:{password}@{host}/{database}', pool_pre_ping=True)
         Session = sessionmaker(bind=self.__engine)
 
-        if os.getenv('HBNB_ENV') == 'test':
+        if getenv('HBNB_ENV') == 'test':
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        """Querries all content of the database based in the classname"""
-        if cls == None:
-            obj = {}
+        """Query all objects depending on the class name."""
+        from models.user import User
+        from models.place import Place
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.review import Review
 
-        for _classes in self.classes.values():
-            obj.extend(self.__session.querry(_classes).all())
-            return obj
+        classes = {
+            'User': User, 'Place': Place, 'State': State,
+            'City': City, 'Amenity': Amenity, 'Review': Review
+        }
 
+        objects = {}
+
+        if cls:
+            if isinstance(cls, str):
+                cls = classes.get(cls)
+            objs = self.__session.query(cls).all()
+            for obj in objs:
+                key = f"{obj.__class__.__name__}.{obj.id}"
+                objects[key] = obj
         else:
-            return self.__session.querry(classes[cls]).all()
+            for clss in classes.values():
+                objs = self.__session.query(clss).all()
+                for obj in objs:
+                    key = f"{obj.__class__.__name__}.{obj.id}"
+                    objects[key] = obj
+        return objects
 
     def new(self, obj):
         """Adds object to the current database session"""
