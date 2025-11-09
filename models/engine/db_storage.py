@@ -5,6 +5,7 @@ from os import getenv
 from models.base_model import Base
 
 
+
 class DBStorage:
     """New engine for the model, that implements interaction with the database"""
     
@@ -20,7 +21,7 @@ class DBStorage:
         Session = sessionmaker(bind=self.__engine)
 
         if getenv('HBNB_ENV') == 'test':
-            Base.metadata.drop_all(self.__engine)
+           Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         """Query all objects depending on the class name."""

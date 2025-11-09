@@ -4,12 +4,6 @@ import json
 
 from models.base_model import BaseModel
 
-classes = {
-            'BaseModel': BaseModel, 'User': User, 'Place': Place,
-            'State': State, 'City': City, 'Amenity': Amenity,
-            'Review': Review
-          }
-
 
 class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
@@ -54,6 +48,12 @@ class FileStorage:
                 from models.city import City
                 from models.amenity import Amenity
                 from models.review import Review
+
+                classes = {
+                    'BaseModel': BaseModel, 'User': User, 'Place': Place,
+                    'State': State, 'City': City, 'Amenity': Amenity,
+                    'Review': Review
+                    }
 
                 temp = json.load(f)
                 for key, val in temp.items():
