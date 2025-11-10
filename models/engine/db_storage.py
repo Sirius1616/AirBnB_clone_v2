@@ -33,7 +33,7 @@ class DBStorage:
         from models.review import Review
 
         classes = {
-            'User': User, 'Place': Place, 'State': State,
+            'BaseModel':BaseModel, 'User': User, 'Place': Place, 'State': State,
             'City': City, 'Amenity': Amenity, 'Review': Review
         }
 
