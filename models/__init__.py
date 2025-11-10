@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 """This module instantiates an object of class FileStorage"""
 from os import getenv
 

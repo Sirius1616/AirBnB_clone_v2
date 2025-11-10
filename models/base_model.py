@@ -30,7 +30,6 @@ class BaseModel:
                 if key in ('updated_at', 'created_at'):
                     value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
                 setattr(self, key, value)
-                            
             del kwargs['__class__']
             self.__dict__.update(kwargs)
 

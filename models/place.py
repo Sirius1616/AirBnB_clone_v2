@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String,ForeignKey
@@ -10,4 +10,5 @@ class Place(BaseModel, Base):
     __tablename__ = 'places'
     name = Column(String(128), nullable=False)
     city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
+    cities = relationship('City', back_populates='places')
    

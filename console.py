@@ -144,7 +144,7 @@ class HBNBCommand(cmd.Cmd):
                         value = int(value)
                     except ValueError:
                         continue
-            setattr(new_instance, key, value)
+                setattr(new_instance, key, value)
 
             
 

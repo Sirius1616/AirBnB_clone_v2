@@ -25,6 +25,7 @@ class DBStorage:
 
     def all(self, cls=None):
         """Query all objects depending on the class name."""
+        from models.BaseModel import BaseModel
         from models.user import User
         from models.place import Place
         from models.state import State
@@ -33,7 +34,7 @@ class DBStorage:
         from models.review import Review
 
         classes = {
-            'User': User, 'Place': Place, 'State': State,
+            'BaseModel':BaseModel, 'User': User, 'Place': Place, 'State': State,
             'City': City, 'Amenity': Amenity, 'Review': Review
         }
 
