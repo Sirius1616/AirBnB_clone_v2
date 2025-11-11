@@ -38,11 +38,10 @@ class DBStorage:
         }
 
         objects = {}
-
         if cls:
             if isinstance(cls, str):
                 cls = classes.get(cls)
-            if cls and hasattr('__tablename__'):
+            if cls and hasattr(cls, '__tablename__'):
                 objs = self.__session.query(cls).all()
                 for obj in objs:
                     key = f"{obj.__class__.__name__}.{obj.id}"
