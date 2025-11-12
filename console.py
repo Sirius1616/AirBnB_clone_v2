@@ -114,7 +114,12 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, args):
-        """Create an object of any class with parameters"""
+        """Creates a new instance of a given class with parameters.
+        Usage: create <ClassName> key1=value1 key2=value2 ...
+        Example:
+            create User name="John_Doe" age=30 height=5.9
+        """
+
         if not args:
             print("** class name missing **")
             return
@@ -122,23 +127,50 @@ class HBNBCommand(cmd.Cmd):
         args_list = args.split()
         class_name = args_list[0]
 
+        # Validate class name
         if class_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
 
-        # Parse key=value parameters
+        # Prepare kwargs for instance creation
         kwargs = {}
+
         for param in args_list[1:]:
-            if '=' in param:
-                key, value = param.split('=', 1)
-                kwargs[key] = value
+            if "=" not in param:
+                continue
+
+            key, value = param.split("=", 1)
+
+            # Handle string values
+            if value.startswith('"') and value.endswith('"'):
+                value = value[1:-1]  # remove surrounding quotes
+                value = value.replace('\\"', '"')  # unescape quotes
+                value = value.replace('_', ' ')  # replace underscores with spaces
+
+            # Handle float values
+            elif '.' in value:
+                try:
+                    value = float(value)
+                except ValueError:
+                    continue  # skip invalid float
+
+            # Handle integer values
+            else:
+                try:
+                    value = int(value)
+                except ValueError:
+                    continue  # skip invalid int
+
+            kwargs[key] = value
 
         try:
+            # Create and save instance
             new_instance = HBNBCommand.classes[class_name](**kwargs)
             new_instance.save()
             print(new_instance.id)
         except Exception as e:
             print("** Error creating instance: {} **".format(e))
+
 
     def help_create(self):
         """Help information for the create method"""
