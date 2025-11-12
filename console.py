@@ -118,21 +118,21 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        
+
         args_list = args.split()
         class_name = args_list[0]
-        
+
         if class_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        
+
         # Parse key=value parameters
         kwargs = {}
         for param in args_list[1:]:
             if '=' in param:
                 key, value = param.split('=', 1)
-                kwargs[key] = self._parse_parameter_value(value)
-        
+                kwargs[key] = value
+
         try:
             new_instance = HBNBCommand.classes[class_name](**kwargs)
             new_instance.save()
