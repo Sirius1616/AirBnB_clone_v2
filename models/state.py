@@ -3,7 +3,6 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
-from models import storage
 from os import getenv
 
 
@@ -19,6 +18,7 @@ class State(BaseModel, Base):
         def cities(self):
             """Return list of city instances with state_id equal to current State"""
             from models.city import City
+            from models import storage
             city_list = []
             for city in storage.all(City).values():
                 if city.state_id == self.id:
