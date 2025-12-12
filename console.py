@@ -3,7 +3,7 @@
 """ Console Module """
 import cmd
 import sys
-from models.base_model import BaseModel
+from models.base_model import BaseMode
 from models import storage
 from models.user import User
 from models.place import Place
