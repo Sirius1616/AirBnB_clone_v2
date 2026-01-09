@@ -11,7 +11,7 @@ class Review(BaseModel, Base):
     text = Column(String(1024), nullable=True)
     place_id = Column(String(60), nullable=False, ForeignKey='places.id')
     user_id = Column(String(60), nullable=False, ForeignKey='user.id')
-    places = relationship('Place', back_populates='reviews')
+    place = relationship('Place', back_populates='review')
     users = relationship('User', back_populates='reviews')
 
 
