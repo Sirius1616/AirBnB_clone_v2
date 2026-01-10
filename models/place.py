@@ -5,7 +5,7 @@ from sqlalchemy import Column, String, ForeignKey, Integer, Table
 from sqlalchemy.orm import relationship
 
 
-place_amenitiy = Table('place_amenity',
+place_amenity = Table('place_amenity',
                     Base.metadata,
                     Column('place_id', String(60), ForeignKey('places.id'), primary_key=True, nullable=False),
                     Column('amenity_id', String(60), ForeignKey('amenities.id'), primary_key=True, nullable=False)
@@ -30,9 +30,9 @@ class Place(BaseModel, Base):
 
     #relationships
     user = relationship('User', back_populates='places')
-    city = relationship('City', back_populates='places')
-    reviews = relationship('Review', back_populates='places', cascade='all, delete, delete-orphan')
-    amenities = relationship('Amenity', secondary='place_amenity', back_populates='places', viewonly=False)
+    cities = relationship('City', back_populates='places')
+    reviews = relationship('Review', back_populates='place', cascade='all, delete, delete-orphan')
+    amenities = relationship('Amenity', secondary='place_amenity', back_populates='place', viewonly=False)
     
 
 
