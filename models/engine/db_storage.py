@@ -30,10 +30,11 @@ class DBStorage:
         from models.place import Place
         from models.state import State
         from models.city import City
+        from models.review import Review
 
         classes = {
             'User': User, 'Place': Place, 'State': State,
-            'City': City
+            'City': City, 'Review': Review
         }
 
         objects = {}
